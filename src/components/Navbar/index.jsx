@@ -1,9 +1,17 @@
-import { Box, Container, Typography, Button } from "@mui/material";
 import React from "react";
 
-const Navbar = () => {
+// MUI
+import { Box, Typography, Button } from "@mui/material";
 
-  const pages = ['Imágenes', 'Patos', 'Registrar'];
+// React Router
+import { Link } from "react-router-dom";
+
+const Navbar = () => {
+  const pages = [ // Array for label and route
+    ["Imágenes", "images"],
+    ["Patos", "ducks"],
+    ["Registrar", "register"],
+  ];
 
   return (
     <Box
@@ -14,10 +22,12 @@ const Navbar = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        backgroundColor: "#f6f7f6"
+        backgroundColor: "#f6f7f6",
       }}
     >
       <Box
+        component={Link}
+        to="/"
         sx={{
           display: "flex",
           width: "125px",
@@ -25,6 +35,7 @@ const Navbar = () => {
           "&:hover": {
             cursor: "pointer",
           },
+          textDecoration: "none",
         }}
       >
         <img
@@ -39,16 +50,24 @@ const Navbar = () => {
           variant="h4"
           color="initial"
         >
-          Duck
+          Ducks
         </Typography>
       </Box>
       <Box sx={{ display: { xs: "none", md: "flex" } }}>
         {pages.map((page) => (
           <Button
-            key={page}
-            sx={{ my: 2, color: "#333232", display: "block", fontWeight: "600" }}
+            component={Link}
+            to={`/${page[1]}`}
+            key={page[0]}
+            sx={{
+              my: 2,
+              color: "#333232",
+              display: "block",
+              fontWeight: "600",
+              textDecoration: "none",
+            }}
           >
-            {page}
+            {page[0]}
           </Button>
         ))}
       </Box>
